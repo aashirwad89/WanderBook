@@ -1,0 +1,116 @@
+<% layout("/layouts/BoilerPlate") %>
+ <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <style>
+    #map { height: 300px; width: 100%; margin-top: 20px; }
+  </style>
+
+<div class="container py-5">
+
+  <!-- Listing Title -->
+  <div class="row mb-4">
+    <div class="col-10 offset-1 text-center">
+      <h2 class="fw-bold text-primary"><%= listing.title %></h2>
+    </div>
+  </div>
+
+  <!-- Listing Card -->
+  <div class="card col-md-8 offset-md-2 shadow-lg border-0 rounded-3 overflow-hidden animate-card mb-5">
+    <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing_image" style="max-height: 400px; object-fit: cover;">
+    <div class="card-body p-4">
+      <p class="card-text fs-6 text-muted">
+        <i class="fa-solid fa-user me-2"></i><i>Owned by <%= listing.owner.username %></i>
+        <hr>
+        <ul class="list-unstyled mt-3">
+          <li>🌿 <%= listing.description %></li>
+          <li>💰 ₹ <%= listing.price ? listing.price.toLocaleString("en-IN") : '0' %> / Night</li>
+          <li>📍 <%= listing.location %></li>
+          <li>🌎 <%= listing.country %></li>
+        </ul>
+      </p>
+    </div>
+  </div>
+
+  <!-- Edit/Delete Buttons -->
+<% if(currUser && listing.owner._id.equals(currUser._id)) { %>
+  <div class="d-flex justify-content-center gap-3 mb-5">
+    <a href="/listings/<%= listing._id %>/edit" class="btn btn-outline-primary px-4">✏️ Edit</a>
+    <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+      <button class="btn btn-outline-danger px-4">🗑️ Delete</button>
+    </form>
+  </div>
+<% } %>
+
+<div class="reviews-section">
+    <!-- Submit Review Form -->
+    <h3>Add a Review</h3>
+    <form action="/listings/<%= listing._id %>/reviews" method="POST">
+        <div class="form-group">
+            <label for="rating">Rating</label>
+            <select name="review[rating]" id="rating" class="form-control" required>
+                <option value="">Select</option>
+                <option value="1">⭐</option>
+                <option value="2">⭐⭐</option>
+                <option value="3">⭐⭐⭐</option>
+                <option value="4">⭐⭐⭐⭐</option>
+                <option value="5">⭐⭐⭐⭐⭐</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="comment">Comment</label>
+            <textarea name="review[comment]" id="comment" class="form-control" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-success mt-2">Submit Review</button>
+    </form>
+
+    <hr>
+
+    <!-- All Reviews Section -->
+    <h3>All Reviews</h3>
+    <% if (listing.reviews.length > 0) { %>
+        <% listing.reviews.forEach(review => { %>
+            <div class="review-card border p-2 my-2 rounded">
+                <p><strong>Rating:</strong> <%= review.rating %> ⭐</p>
+                <p><%= review.comment %></p>
+                <small>By: <%= review.author?.username || "Anonymous" %></small>
+            </div>
+        <% }) %>
+    <% } else { %>
+        <p>No reviews yet. Be the first to review!</p>
+    <% } %>
+</div>
+
+
+
+
+
+</div>
+
+<style>
+  /* Animation for cards */
+  .animate-card {
+    animation: fadeInUp 0.6s ease-in-out;
+  }
+
+  .review-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Fade-in animation */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

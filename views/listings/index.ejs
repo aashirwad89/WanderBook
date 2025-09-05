@@ -1,0 +1,400 @@
+<% layout("/layouts/BoilerPlate") %>
+<body class="bg-light">
+<style>
+  #filters{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .filter{
+    text-align: center;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    opacity: 0.7;
+  }
+  .filter:hover{
+    opacity: 1;
+    cursor: pointer;
+  }
+  .filter p{
+    font-size: 12px;
+  }
+  .tax-info{
+    display: none;
+  }
+  .tax-toggle{
+    border: 1px solid black;
+    height: 3rem;
+    padding: 10px 10px;
+    text-align: center;
+    border-radius: 10px;
+    margin-top: 25px;
+    cursor: pointer;
+  }
+   /* Center the search bar */
+  .search-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+    max-width: 600px;
+    width: 90%;
+  }
+
+  /* Search bar styling */
+  .search-bar {
+    width: 100%;
+    background: #fff;
+    border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    overflow: hidden;
+    border: none;
+  }
+
+  /* Input field */
+  .search-input {
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    outline: none;
+    flex: 1;
+  }
+
+  .search-input::placeholder {
+    color: #888;
+  }
+
+  /* Button styling */
+  .search-btn {
+    background: #ff7e00;  /* Orange theme */
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+  }
+
+  .search-btn:hover {
+    background: #ff5500;
+    box-shadow: 0 3px 8px rgba(255,85,0,0.3);
+  }
+
+  /* Responsive */
+  @media (max-width: 576px) {
+    .search-bar {
+      flex-direction: column;
+      border-radius: 20px;
+    }
+    .search-input {
+      border-radius: 20px 20px 0 0;
+    }
+    .search-btn {
+      border-radius: 0 0 20px 20px;
+      width: 100%;
+    }
+  }
+</style>
+
+
+
+  <!-- hero section -->
+ <div class="hero">
+
+    <h1 class="display-4 fw-bold">Discover Your Perfect <span>Gateway</span></h1>
+    <p class="lead fw-extralight">Experience luxury and comfort at the world's finest hotels</p>
+   <div class="search-container">
+  <form action="/listings" method="GET" class="search-bar d-flex" role="search">
+    <input 
+      class="search-input"
+      name="q"
+      value="<%= typeof query !== 'undefined' ? query : '' %>" 
+      type="search" 
+      placeholder="🔍 Search hotels, destinations..." 
+      aria-label="Search"
+    />
+    <button class="btn search-btn" type="submit">Search</button>
+  </form>
+  <br>
+</div>
+    <div>
+      <a href="#explore" class="btn btn-dark">Explore Hotels</a>
+      <a href="/login" class="btn btn-outline-dark">View Destinations</a>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats d-flex justify-content-center text-center text-black">
+      <div class="mx-4">
+        <h4>100+</h4>
+        <p>Luxury Hotels</p>
+      </div>
+      <div class="mx-4">
+        <h4>25+</h4>
+        <p>Countries</p>
+      </div>
+      <div class="mx-4">
+        <h4>1M+</h4>
+        <p>Happy Guests</p>
+      </div>
+    </div>
+    
+   <!-- Scroll Indicator -->
+<div class="scroll-indicator text-center">
+  <i class="fa-solid fa-computer-mouse fa-2x bounce"></i>
+  <p class="small">Scroll to explore</p>
+</div>
+  </div>
+
+<!-- Chatbot Icon -->
+<a href="#" class="chatbot-icon" id="chatbotToggle">
+  <i class="fa-solid fa-robot fa-lg"></i>
+  <div class="notification"></div>
+</a>
+
+<!-- Chatbot Window -->
+<div class="chatbot-window shadow-lg rounded-3 d-none" id="chatbotWindow">
+  <div class="chatbot-header d-flex justify-content-between align-items-center p-2 bg-primary text-white rounded-top">
+    <span><i class="fa-solid fa-robot me-2"></i> Wander Assistant</span>
+    <button class="btn btn-sm btn-light" id="closeChat"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="chatbot-body p-3" id="chatbotBody">
+    <div class="chatbot-msg bot">Hello 👋, I’m your Wander assistant. How can I help you today?</div>
+    
+    <!-- Quick Reply Buttons -->
+    <div class="quick-replies mt-2">
+      <button class="btn btn-sm btn-outline-primary m-1 quick-btn">Book Room</button>
+      <button class="btn btn-sm btn-outline-primary m-1 quick-btn">Price</button>
+      <button class="btn btn-sm btn-outline-primary m-1 quick-btn">Facilities</button>
+      <button class="btn btn-sm btn-outline-primary m-1 quick-btn">Check in time</button>
+      <button class="btn btn-sm btn-outline-primary m-1 quick-btn">Location</button>
+    </div>
+  </div>
+  <div class="chatbot-footer p-2">
+    <input type="text" id="chatInput" class="form-control" placeholder="Type a message...">
+  </div>
+</div>
+<hr>
+
+<!-- Filters section -->
+  <div id="filters">
+   <div class="filter">
+    <div><i class="fa-solid fa-fire"></i></div>
+<p>Trending</p>
+   </div>
+    <div class="filter">
+    <div><i class="fa-solid fa-bed"></i></div>
+<p>Rooms</p>
+   </div>
+   <div class="filter">
+    <div><i class="fa-solid fa-mountain-sun"></i></div>
+<p>Mountains</p>
+   </div>
+    <div class="filter">
+    <div><i class="fa-solid fa-person-swimming"></i></div>
+<p>Pools</p>
+   </div>
+   <div class="filter">
+    <div><i class="fa-solid fa-tree-city"></i></div>
+<p>Iconic Cities</p>
+   </div>
+   <div class="filter">
+    <div><i class="fa-solid fa-leaf"></i></div>
+<p>Nature</p>
+   </div>
+    <div class="filter">
+    <div><i class="fa-brands fa-pagelines"></i></div>
+<p>Paradise</p>
+   </div>
+     <div class="filter">
+    <div><i class="fa-solid fa-tents"></i></div>
+<p>Camping</p>
+   </div>
+   <div class="filter">
+    <div><i class="fa-solid fa-route"></i></div>
+<p>Adventure</p>
+   </div>
+   <!-- Tax Switch -->
+   <div class="tax-toggle ">
+    <div class="form-check-reverse form-switch">
+  <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+  <label class="form-check-label" for="switchCheckDefault">Display total after taxes</label>
+</div>
+   </div>
+  </div>
+
+<!-- main listing -->
+  <div id="explore" class="container py-5">
+  <h2 class="text-center fw-bold mb-4"> Explore All Listings </h2>
+
+<% if (allListing.length > 0) { %>
+  <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4">
+    <% for (let listing of allListing) { %>
+      <div class="col">
+        <a href="/listings/<%= listing._id %>" class="text-decoration-none text-dark">
+          <div class="card h-100 shadow-sm border-0 rounded-3 overflow-hidden listing-card">
+            <div class="position-relative">
+              <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_img" style="height: 18rem; object-fit: cover;">
+              <div class="card-img-overlay d-flex align-items-center justify-content-center bg-dark bg-opacity-50 text-white opacity-0 hover-overlay fw-semibold fs-5">
+                Book Now <i class="fa-solid fa-circle-info ms-2"></i>
+              </div>
+            </div>
+            <div class="card-body text-center">
+              <p class="card-text mb-1 fw-bold"><%= listing.title %></p>
+              <p class="card-text text-muted">
+                ₹ <%= listing.price ? listing.price.toLocaleString("en-IN") : '0' %> / Night
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+    <% } %>
+  </div>
+<% } else { %>
+  <div class="text-center my-5">
+    <h4 class="text-muted">No listings found for "<%= query %>" 😢</h4>
+    <a href="/listings" class="btn btn-outline-primary mt-3">View All Listings</a>
+  </div>
+<% } %>
+
+  </div>
+
+<!-- Contact and about -->
+  <section id="about" class="about-contact py-5 bg-light">
+  <div class="container">
+    <div class="row align-items-center">
+      
+      <!-- Contact Us (Left) -->
+      <div class="col-md-6 mb-4 mb-md-0">
+        <h2 class="fw-bold mb-4 text-primary">📞 Contact Us</h2>
+        <p class="text-muted">We’d love to hear from you. Reach out through any of the options below.</p>
+        
+        <ul class="list-unstyled">
+          <li class="mb-3">
+            <i class="fa-solid fa-envelope text-primary me-2"></i>
+            <a href="mailto:info@wanderlust.com" class="text-decoration-none text-dark">info@wanderBook.com</a>
+          </li>
+          <li class="mb-3">
+            <i class="fa-solid fa-phone text-primary me-2"></i>
+            <a href="tel:+911234567890" class="text-decoration-none text-dark">+91 123 456 7890</a>
+          </li>
+          <li class="mb-3">
+            <i class="fa-solid fa-location-dot text-primary me-2"></i>
+            Bhopal, Madhya Pradesh, India
+          </li>
+        </ul>
+
+        <!-- Social Links -->
+        <div class="mt-3">
+          <a href="/linkedin" class="me-3 fs-4 text-dark"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="/facebook" class="me-3 fs-4 text-dark"><i class="fa-brands fa-square-facebook"></i></a>
+          <a href="/youtube" class="fs-4 text-dark"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <!-- About Us (Right) -->
+      <div class="col-md-6">
+        <h2 class="fw-bold mb-4 text-primary">ℹ️ About Us</h2>
+        <p class="text-muted">
+          Welcome to <strong>WanderLust</strong>, your trusted travel partner. 
+          We specialize in creating unforgettable journeys that blend adventure, culture, and relaxation. 
+          Our mission is to make every trip unique and hassle-free, tailored to your preferences.
+        </p>
+        <p class="text-muted">
+          Whether you're planning a solo escape, a family vacation, or a corporate retreat, 
+          our dedicated team ensures that your experience is seamless and memorable. 
+          At WanderLust, your journey is our passion. 🌍✈️
+        </p>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+
+<script>
+  const chatbotToggle = document.getElementById("chatbotToggle");
+  const chatbotWindow = document.getElementById("chatbotWindow");
+  const closeChat = document.getElementById("closeChat");
+  const chatInput = document.getElementById("chatInput");
+  const chatBody = document.getElementById("chatbotBody");
+
+  // Open/Close chatbot
+  chatbotToggle.addEventListener("click", () => {
+    chatbotWindow.classList.toggle("d-none");
+  });
+
+  closeChat.addEventListener("click", () => {
+    chatbotWindow.classList.add("d-none");
+  });
+
+  // Responses
+  const responses = {
+    "hi": "Hello! 👋 How can I assist you?",
+    "hello": "Hi there! Welcome to our hotel 🏨",
+    "book room": "Sure! You can book a room directly from our booking page.",
+    "price": "Room prices start at ₹2000/night depending on availability.",
+    "facilities": "We offer free Wi-Fi, breakfast, spa, and swimming pool.",
+    "bye": "Goodbye! 👋 Have a great day!",
+    "check in time": "Our standard check-in time is 12:00 PM. Early check-in is subject to availability.",
+    "location": "We are located in the heart of the city, just 10 minutes from the railway station 🚉.",
+    "parking": "Yes, we provide free parking space for all our guests 🚗.",
+    "wifi": "Free high-speed Wi-Fi is available throughout the hotel 📶.",
+    "restaurant": "Our in-house restaurant serves multi-cuisine dishes 🍽️, open from 7 AM to 11 PM.",
+    "cancellation policy": "You can cancel your booking up to 24 hours before check-in for a full refund.",
+    "contact": "You can reach us at +91-9876543210 📞 or email support@WanderBook.com"
+  };
+
+  // Handle user input
+  chatInput.addEventListener("keypress", function(e) {
+    if (e.key === "Enter" && chatInput.value.trim() !== "") {
+      let userMsg = chatInput.value.trim();
+      processUserMessage(userMsg);
+    }
+  });
+
+  // Handle quick reply buttons
+  document.addEventListener("click", function(e) {
+    if (e.target.classList.contains("quick-btn")) {
+      let userMsg = e.target.innerText;
+      processUserMessage(userMsg);
+    }
+  });
+
+  function processUserMessage(userMsg) {
+    appendMessage(userMsg, "user");
+    chatInput.value = "";
+
+    setTimeout(() => {
+      let botReply = getBotResponse(userMsg.toLowerCase());
+      appendMessage(botReply, "bot");
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }, 600);
+  }
+
+  function appendMessage(msg, sender) {
+    let div = document.createElement("div");
+    div.classList.add("chatbot-msg", sender);
+    div.innerText = msg;
+    chatBody.appendChild(div);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  function getBotResponse(msg) {
+    return responses[msg] || "Sorry, I didn’t understand that. 🙁";
+  }
+</script>
+
+<script>
+  let priceToggle = document.getElementById("switchCheckDefault");
+  priceToggle.addEventListener('click', ()=>{
+    let taxInfo = document.getElementsByClassName("tax-info");
+    for(info of taxInfo){
+      if(info.style.display != "inline"){
+      info.style.display = "inline";
+      }else{
+        info.style.display = "none";
+      }
+    }
+  })
+</script>
+
+  
+</body>

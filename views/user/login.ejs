@@ -1,0 +1,83 @@
+<% layout("/layouts/BoilerPlate") %>
+
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="col-md-6 col-lg-4">
+    <div class="card shadow-lg border-0 rounded-4 animate-login">
+      <div class="card-body p-5">
+        
+        <!-- Heading -->
+        <h2 class="text-center  fw-bold text-primary">
+          <i class="fas fa-lock me-2"></i> Login
+        </h2>
+
+        <!-- Login Form -->
+        <form action="/login" method="POST" class="needs-validation" novalidate>
+          
+          <!-- Username -->
+          <div class="mb-3">
+            <label for="username" class="form-label fw-semibold">
+              <i class="fas fa-user me-2 text-secondary"></i> Username
+            </label>
+            <input class="form-control rounded-3" required type="text" name="username" id="username" placeholder="Enter your username">
+            <div class="valid-feedback">Looks good!</div>
+          </div>
+
+          <!-- Password -->
+          <div class="mb-3">
+            <label for="password" class="form-label fw-semibold">
+              <i class="fas fa-key me-2 text-secondary"></i> Password
+            </label>
+            <input class="form-control rounded-3" required type="password" name="password" id="password" placeholder="Enter your password">
+            <div class="valid-feedback">Great!</div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="d-grid mb-3">
+            <button class="btn btn-primary rounded-3 fw-semibold">
+              <i class="fas fa-sign-in-alt me-2"></i> Login
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Custom Styling -->
+<style>
+  .animate-login {
+    animation: fadeInUp 0.6s ease-in-out;
+  }
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .form-control {
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+  }
+
+  .form-control:focus {
+    box-shadow: 0 0 10px rgba(13, 110, 253, 0.5);
+    transform: scale(1.02);
+  }
+
+  .btn {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+</style>
+
+<!-- Font Awesome CDN -->
+<script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>

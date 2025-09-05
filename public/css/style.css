@@ -1,0 +1,378 @@
+body{
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.container{
+    flex: 1;
+}
+
+html{
+  scroll-behavior: smooth;
+}
+/* Navbar styling */
+.navbar{
+    height: 5rem;
+    background-color: #ffffff;
+}
+.fa-compass-drafting{
+    color: #fe424d;
+    font-size: 2rem;
+}
+.nav-link{
+    color: #222222 !important;
+}
+/* footer styling */
+.footer-info{
+    background-color: rgb(211, 206, 206);
+height: 8rem;
+    display: flex;
+    align-items: space-evenly;
+    text-align: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.footer-info a {
+    text-decoration: none;
+    margin-right: 1rem;
+}
+.footer-first, .footer-second, .footer-head{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 1.2rem;
+}
+.footer-first i{
+    margin-right: 1rem;
+}
+.footer-info a:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.footer-head {
+    font-size: 1rem;
+}
+/* cards styling */
+
+.listing-card{
+    border: none !important;
+    margin-bottom: 2rem;
+
+}
+.card-img-top{
+     border-radius: 1.4rem !important;
+     width: 100% !important;
+     object-fit: cover !important;
+}
+.card-body{
+    padding: 0 !important;
+}
+.card-text  p{
+    font-weight: 500;
+}
+.row a{
+    text-decoration: none;
+}
+.row a:hover{
+    transform: translateY(-15px);
+    transition: .3s all ease-in-out;
+    opacity: 90%;
+}
+.card-img-overlay{
+opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: 100%;
+    font-size: 12px;
+}
+
+/* btn styling */
+.add-btn{
+    border: none !important;
+    width: 100px !important;
+    border-radius: 10px !important;
+    background-color: rgb(70, 70, 249) !important;
+}
+.add-btn:hover{
+    transform: translateY(-5px);
+    transition: .3s all ease-in;
+    opacity: 80%;
+}
+.edit-btn{
+    width: 90px;
+    border: none !important;
+    border-radius: 10px !important;
+        background-color: rgb(50, 50, 243) !important; 
+}
+.edit-btn:hover{
+    transform: translateY(-5px);
+    transition: .3s all ease-in;
+    opacity: 80%;
+}
+.btns{
+    display: flex;
+    gap: 10px !important;
+    margin-bottom: 10px !important;
+}
+
+.show-img{
+    height: 30vh;
+}
+
+.this-card{
+    padding-left: 0;
+    padding-right: 0;
+}
+.submit-btn{
+    height: 30px;
+    width: 95px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 16px;
+}
+
+.hover-link {
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+  .hover-link:hover {
+    color: #0d6efd; /* bootstrap primary */
+    transform: translateY(-2px);
+  }
+  .navbar-brand {
+    transition: transform 0.2s ease;
+  }
+  .navbar-brand:hover {
+    transform: scale(1.05);
+  }
+   .footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .footer-icon {
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .footer-icon:hover {
+    color: #0d6efd; /* bootstrap primary blue */
+    transform: translateY(-3px);
+  }
+
+  .footer-link {
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+    padding-bottom: 2px;
+  }
+
+  .footer-link:hover {
+    color: #0d6efd;
+    border-bottom: 1px solid #0d6efd;
+  }
+
+   /* Card hover effects */
+    .listing-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 15px;
+    }
+
+    .listing-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Overlay effect */
+    .hover-overlay {
+      transition: opacity 0.3s ease;
+    }
+
+    .listing-card:hover .hover-overlay {
+      opacity: 1;
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      padding: 0 15px;
+    }
+    .hero h1 span {
+      color: #ff9800; /* Orange highlight for 'Getaway' */
+    }
+    .hero .btn {
+      margin: 0.5rem;
+      padding: 0.7rem 1.5rem;
+      border-radius: 30px;
+      font-weight: bold;
+    }
+    .stats {
+      margin-top: 2rem;
+    }
+    .scroll-indicator {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: #333;
+    }
+    .chatbot-icon {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #343a40;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.3);
+      transition: 0.3s;
+    }
+    .chatbot-icon:hover {
+      background: #495057;
+    }
+    .chatbot-icon .notification {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 12px;
+      height: 12px;
+      background: red;
+      border-radius: 50%;
+    }
+    .scroll-indicator {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #333;
+}
+
+.bounce {
+  display: inline-block;
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+  .nav-animated {
+    position: relative;
+    color: #212529 !important;
+    text-decoration: none;
+  }
+
+  .nav-animated::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0%;
+    height: 2px;
+    background-color: #c4300b; /* Bootstrap primary blue */
+    transition: width 0.3s ease-in-out;
+  }
+
+  .nav-animated:hover::after {
+    width: 100%;
+  }
+
+  .nav-animated:hover {
+    cursor: pointer;
+  }
+  .about-section {
+  background: linear-gradient(135deg, #f8f9fa, #ffffff);
+}
+.about-section h2 {
+  font-size: 2.2rem;
+  border-left: 5px solid #0d6efd;
+  padding-left: 10px;
+}
+/* Chatbot Icon */
+  .chatbot-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #151718;
+    color: white;
+    padding: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease;
+    z-index: 1000;
+  }
+  .chatbot-icon:hover {
+    transform: scale(1.1);
+  }
+
+  /* Chatbot Window */
+  .chatbot-window {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 320px;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    z-index: 1001;
+  }
+
+  .chatbot-body {
+    height: 320px;
+    overflow-y: auto;
+    font-size: 14px;
+    background: #f8f9fa;
+  }
+
+  .chatbot-msg {
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    max-width: 80%;
+    clear: both;
+  }
+
+  .chatbot-msg.bot {
+    background: #e9ecef;
+    float: left;
+  }
+
+  .chatbot-msg.user {
+    background: #0d6efd;
+    color: white;
+    float: right;
+  }
+
+  .chatbot-footer {
+    border-top: 1px solid #dee2e6;
+  }
+
+  /* Quick Reply Buttons */
+  .quick-replies {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .quick-btn {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
