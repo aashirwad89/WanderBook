@@ -12,7 +12,7 @@ const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
-const User = require("./models/user");
+const User = require("./models/User");
 const multer  = require('multer')
 const upload = multer({ dest: 'uploads/' })
 
